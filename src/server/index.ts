@@ -1,7 +1,7 @@
 import "dotenv/config";
-import chalk from "chalk";
 
 import app from "./app.js";
+import chalk from "chalk";
 
 const port = process.env.PORT;
 

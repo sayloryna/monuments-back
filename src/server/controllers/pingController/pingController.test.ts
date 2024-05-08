@@ -21,12 +21,12 @@ describe("Given the pingController handler", () => {
       expect(res.status).toHaveBeenCalledWith(statusCode);
     });
 
-    test("Then it should call its json method with a'🏓 Pong' ping", () => {
+    test("Then it should call its json method with a'🏓 Pong' message", () => {
       const expectedPing = "🏓 Pong";
 
       pingController(req as Request, res as Response);
 
-      expect(res.json).toHaveBeenCalledWith({ ping: expectedPing });
+      expect(res.json).toHaveBeenCalledWith({ message: expectedPing });
     });
   });
 });

@@ -1,7 +1,6 @@
 import chalk from "chalk";
 import { type NextFunction, type Request, type Response } from "express";
-
-import ServerError from "./ServerError.js";
+import ServerError from "./errors/ServerError/ServerError.js";
 
 export const notFoundError = (
   _req: Request,
@@ -13,7 +12,7 @@ export const notFoundError = (
   next(error);
 };
 
-export const errorMiddleware = (
+export const generalError = (
   error: ServerError,
   _req: Request,
   res: Response,
