@@ -1,5 +1,12 @@
-import app from "./app.js";
+import "dotenv/config";
 
-app.listen(4500, () => {
-  console.log(`listening on port 4500`);
+import app from "./app.js";
+import chalk from "chalk";
+
+const port = process.env.PORT;
+
+app.listen(port, () => {
+  console.log(
+    chalk.greenBright.underline("Listening on port http://localhost:4500"),
+  );
 });

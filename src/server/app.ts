@@ -1,13 +1,16 @@
 import express from "express";
-import { notFoundError, errorMiddleware } from "./middleware/errorMidleware.js";
-import pingController from "./pingController/pingController.js";
+import morgan from "morgan";
+import { notFoundError, generalError } from "./middlewares/errorsMidlewares.js";
+import pingController from "./controllers/pingController/pingController.js";
 
 const app = express();
+
+app.use(morgan("dev"));
 
 app.get("/", pingController);
 
 app.use(notFoundError);
 
-app.use(errorMiddleware);
+app.use(generalError);
 
 export default app;
