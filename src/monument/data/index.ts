@@ -25,4 +25,11 @@ const monuments: Monuments = [
     "url",
     { country: "Inglaterra", city: "Wiltshire" },
   ),
+
+  new Monument(
+    "Angkor Wat:",
+    "Es el templo más grande y mejor conservado del complejo de templos de Angkor. Construido en el siglo XII, es un magnífico ejemplo de la arquitectura jemer y es considerado como el símbolo nacional de Camboya.",
+    "url",
+    { country: "Camboya", city: "Siem Reap" },
+  ),
 ];
