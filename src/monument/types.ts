@@ -1,4 +1,4 @@
-interface MonumentStructure {
+export interface MonumentStructure {
   id: string;
   name: string;
   description: string;
@@ -6,3 +6,5 @@ interface MonumentStructure {
   country: string;
   city: string;
 }
+
+export type MonumentLocation = Pick<MonumentStructure, "country" | "city">;
