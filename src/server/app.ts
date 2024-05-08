@@ -1,6 +1,6 @@
 import express from "express";
 import { notFoundError, errorMiddleware } from "./middleware/errorMidleware.js";
-import pingController from "./pingController/pingController.js";
+import pingController from "./controllers/pingController/pingController.js";
 
 const app = express();
 
