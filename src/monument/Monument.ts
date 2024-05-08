@@ -3,12 +3,12 @@ import { type MonumentStructure, type MonumentLocation } from "./types";
 
 class Monument implements MonumentStructure {
   public id: string;
-  public description: string;
   public country: string;
   public city: string;
 
   constructor(
     public name: string,
+    public description: string,
     public imageUrl: string,
     location: MonumentLocation,
   ) {
@@ -17,3 +17,5 @@ class Monument implements MonumentStructure {
     this.city = location.city;
   }
 }
+
+export default Monument;
