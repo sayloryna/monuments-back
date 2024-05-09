@@ -10,11 +10,11 @@ class Monument implements MonumentStructure {
     public name: string,
     public description: string,
     public imageUrl: string,
-    location: MonumentLocation,
+    { country, city }: MonumentLocation,
   ) {
     this.id = randomUUID();
-    this.country = location.country;
-    this.city = location.city;
+    this.country = country;
+    this.city = city;
   }
 }
 

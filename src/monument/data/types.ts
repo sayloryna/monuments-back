@@ -1,4 +1,4 @@
-import type Monument from "../Monument";
+import type Monument from "../Monument/Monument";
 
 type Monuments = Monument[];
 
