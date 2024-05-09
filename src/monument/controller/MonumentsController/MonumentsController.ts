@@ -7,7 +7,9 @@ class MonumentsController implements MonumentControllerStructure {
   constructor(private readonly monumentsRepository: MonumentsRepository) {}
 
   getMonuments = async (_req: Request, res: Response): Promise<void> => {
-    res.status(200).json({ monumens: await this.monumentsRepository.getAll() });
+    res
+      .status(200)
+      .json({ monuments: await this.monumentsRepository.getAll() });
   };
 }
 
