@@ -7,6 +7,7 @@ import { monumentsRouter } from "./routers/monumentsRouter.js";
 const app = express();
 
 app.use(morgan("dev"));
+app.use(express.json());
 
 app.get("/", pingController);
 
