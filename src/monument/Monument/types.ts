@@ -1,3 +1,5 @@
+import type Monument from "./Monument";
+
 export interface MonumentStructure {
   id: string;
   name: string;
@@ -8,3 +10,5 @@ export interface MonumentStructure {
 }
 
 export type MonumentLocation = Pick<MonumentStructure, "country" | "city">;
+
+export type Monuments = Monument[];

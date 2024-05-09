@@ -1,5 +1,5 @@
-import Monument from "../Monument/Monument";
-import type Monuments from "./types";
+import Monument from "../Monument/Monument.js";
+import { type Monuments } from "../Monument/types";
 
 const monuments: Monuments = [
   new Monument(
@@ -36,3 +36,5 @@ const monuments: Monuments = [
     { country: "Emiratos Árabes Unidos", city: "Abu Dabi" },
   ),
 ];
+
+export default monuments;
