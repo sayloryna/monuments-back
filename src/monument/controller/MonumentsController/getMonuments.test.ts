@@ -12,8 +12,14 @@ describe("Given the MonumentsController getMonument method", () => {
 
     test("Then it should call its status with 200 and its json method with a list o monuments", async () => {
       const monuments: Monuments = [
-        new Monument("a", "a", "a", { city: "a", country: "a" }),
-        new Monument("b", "b", "b", { city: "b", country: "b" }),
+        new Monument("Sagrada familia", "basilica sin acabar", "url", {
+          city: "BCN",
+          country: "España",
+        }),
+        new Monument("Torre Eiffel", "torre de hierro", "url", {
+          city: "Paris",
+          country: "Francia",
+        }),
       ];
 
       const monumentsRepository = new InMemoryMonumentsRepository(monuments);
