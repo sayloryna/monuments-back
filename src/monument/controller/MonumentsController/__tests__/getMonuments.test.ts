@@ -1,8 +1,8 @@
 import { type Request, type Response } from "express";
-import Monument from "../../Monument/Monument";
-import InMemoryMonumentsRepository from "../../repository/InMemoryMonumentRepository";
-import MonumentsController from "./MonumentsController";
-import { type Monuments } from "../../Monument/types";
+import { type Monuments } from "../../../Monument/types";
+import Monument from "../../../Monument/Monument";
+import InMemoryMonumentsRepository from "../../../repository/InMemoryMonumentRepository";
+import MonumentsController from "../MonumentsController";
 
 describe("Given the MonumentsController getMonument method", () => {
   describe("When it receives a response", () => {
