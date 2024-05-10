@@ -11,9 +11,15 @@ class InMemoryMonumentsRepository implements MonumentsRepository {
     name: string,
     description: string,
     imageUrl: string,
-    location: MonumentLocation,
+    { country, city }: MonumentLocation,
   ): Promise<Monument> => {
-    const newMonument = new Monument(name, description, imageUrl, location);
+    const newMonument = new Monument(name, description, imageUrl, {
+      country,
+      city,
+    });
+    if (this.monuments.find((monument) => monument.name === name)) {
+      throw new Error("Monument already exists");
+    }
 
     this.monuments.push(newMonument);
 
