@@ -1,7 +1,7 @@
 import type Monument from "../../Monument/Monument";
 import InMemoryMonumentsRepository from "../InMemoryMonumentRepository";
 
-describe("Given the inMemoryMonumentRepository addMonument", () => {
+describe("Given the inMemoryMonumentRepository addMonument method", () => {
   describe("When it receives 'Sagrada Familia','templo sin acabar', 'url' 'BCN' y 'España'", () => {
     test("Then it should return the  'sagrada familia' monument", async () => {
       const monumentData: Omit<Monument, "id"> = {
