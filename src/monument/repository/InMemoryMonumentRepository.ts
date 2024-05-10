@@ -25,6 +25,20 @@ class InMemoryMonumentsRepository implements MonumentsRepository {
 
     return newMonument;
   };
+
+  deleteMonumentById = async (monumentId: string) => {
+    const monumentToDeleteIndex = this.monuments.findIndex(
+      (monument) => monument.id === monumentId,
+    );
+
+    if (monumentToDeleteIndex === -1) {
+      throw new Error("No monument matches that Id");
+    }
+
+    const [deletedMonument] = this.monuments.splice(monumentToDeleteIndex, 1);
+
+    return deletedMonument;
+  };
 }
 
 export default InMemoryMonumentsRepository;
