@@ -12,4 +12,13 @@ export type RequestWithMonumentBodyWithoutId = Request<
   Record<string, unknown>,
   Omit<Monument, "id">
 >;
+
+export type PartialRequestWithMonumentWithoutId = Partial<
+  Request<
+    Record<string, unknown>,
+    Record<string, unknown>,
+    Omit<Monument, "id">
+  >
+>;
+
 export default MonumentControllerStructure;

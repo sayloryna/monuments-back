@@ -1,8 +1,11 @@
-import { type Response, type Request } from "express";
+import { type NextFunction, type Response } from "express";
 import Monument from "../../../Monument/Monument";
 import MonumentsController from "../MonumentsController";
 import type InMemoryMonumentsRepository from "../../../repository/InMemoryMonumentRepository";
-import { type RequestWithMonumentBodyWithoutId } from "../types";
+import {
+  type PartialRequestWithMonumentWithoutId,
+  type RequestWithMonumentBodyWithoutId,
+} from "../types";
 import { monumentsController } from "../..";
 
 describe("Given the  monumentsConroller addMonument method", () => {
@@ -11,13 +14,7 @@ describe("Given the  monumentsConroller addMonument method", () => {
       status: jest.fn().mockReturnThis(),
       json: jest.fn(),
     };
-    const req: Partial<
-      Request<
-        Record<string, unknown>,
-        Record<string, unknown>,
-        Omit<Monument, "id">
-      >
-    > = {
+    const req: PartialRequestWithMonumentWithoutId = {
       body: {
         name: "Sagrada familia",
         description: "templo sin acabar",
@@ -26,10 +23,12 @@ describe("Given the  monumentsConroller addMonument method", () => {
         imageUrl: "url",
       },
     };
+    const next = jest.fn();
 
     beforeEach(() => {
       jest.clearAllMocks();
     });
+
     test("Then it should call the response method with  the 'Sagrada familia' monument", async () => {
       const monumentData: Omit<Monument, "id"> = {
         name: "Sagrada familia",
@@ -45,13 +44,7 @@ describe("Given the  monumentsConroller addMonument method", () => {
         { city: monumentData.city, country: monumentData.country },
       );
 
-      const req: Partial<
-        Request<
-          Record<string, unknown>,
-          Record<string, unknown>,
-          Omit<Monument, "id">
-        >
-      > = {
+      const req: PartialRequestWithMonumentWithoutId = {
         body: {
           name: "Sagrada familia",
           description: "templo sin acabar",
@@ -71,6 +64,7 @@ describe("Given the  monumentsConroller addMonument method", () => {
       await monumentsController.addMonument(
         req as RequestWithMonumentBodyWithoutId,
         res as Response,
+        next as NextFunction,
       );
 
       expect(res.json).toHaveBeenCalledWith({
@@ -78,12 +72,13 @@ describe("Given the  monumentsConroller addMonument method", () => {
       });
     });
 
-    test("Then it should call the response status method with 200", async () => {
+    test("Then it should call the response status method with 201", async () => {
       const expectedStatusCode = 201;
 
       await monumentsController.addMonument(
         req as RequestWithMonumentBodyWithoutId,
         res as Response,
+        next as NextFunction,
       );
 
       expect(res.status).toHaveBeenCalledWith(expectedStatusCode);
