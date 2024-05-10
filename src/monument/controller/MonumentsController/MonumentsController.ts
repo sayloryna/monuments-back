@@ -37,6 +37,22 @@ class MonumentsController implements MonumentControllerStructure {
       next(error);
     }
   };
+
+  deleteMonument = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
+    const monumentId = req.params.id;
+    try {
+      const deletedMonument =
+        await this.monumentsRepository.deleteMonumentById(monumentId);
+
+      res.status(200).json({ deletedMonument });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default MonumentsController;
