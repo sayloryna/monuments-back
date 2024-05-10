@@ -33,11 +33,7 @@ class MonumentsController implements MonumentControllerStructure {
       );
 
       res.status(201).json({ createdMonument: newMonument });
-    } catch {
-      const error = new ServerError(
-        `Monument named "${name}" already exists`,
-        409,
-      );
+    } catch (error) {
       next(error);
     }
   };
