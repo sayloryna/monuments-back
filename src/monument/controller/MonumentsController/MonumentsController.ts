@@ -1,9 +1,7 @@
 import { type NextFunction, type Request, type Response } from "express";
-
 import type MonumentControllerStructure from "./types.js";
 import type MonumentsRepository from "../../repository/types.js";
 import { type RequestWithMonumentBodyWithoutId } from "./types.js";
-import ServerError from "../../../server/middlewares/errors/ServerError/ServerError.js";
 
 class MonumentsController implements MonumentControllerStructure {
   constructor(private readonly monumentsRepository: MonumentsRepository) {}
