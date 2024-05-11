@@ -9,34 +9,35 @@ import {
 import { monumentsController } from "../..";
 
 describe("Given the  monumentsConroller addMonument method", () => {
+  const res: Pick<Response, "status" | "json"> = {
+    status: jest.fn().mockReturnThis(),
+    json: jest.fn(),
+  };
+  const req: PartialRequestWithMonumentWithoutId = {
+    body: {
+      name: "Sagrada familia",
+      description: "templo sin acabar",
+      city: "BCN",
+      country: "España",
+      imageUrl: "url",
+    },
+  };
+  const next: NextFunction = jest.fn().mockReturnThis();
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  const monumentData: Omit<Monument, "id"> = {
+    name: "Sagrada familia",
+    description: "templo sin acabar",
+    imageUrl: "url",
+    city: "BCN",
+    country: "España",
+  };
+
   describe("When it receives a request with 'Sagrada Familia','templo sin acabar', 'url' 'BCN' y 'España'", () => {
-    const res: Pick<Response, "status" | "json"> = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    };
-    const req: PartialRequestWithMonumentWithoutId = {
-      body: {
-        name: "Sagrada familia",
-        description: "templo sin acabar",
-        city: "BCN",
-        country: "España",
-        imageUrl: "url",
-      },
-    };
-    const next = jest.fn();
-
-    beforeEach(() => {
-      jest.clearAllMocks();
-    });
-
     test("Then it should call the response method with  the 'Sagrada familia' monument", async () => {
-      const monumentData: Omit<Monument, "id"> = {
-        name: "Sagrada familia",
-        description: "templo sin acabar",
-        imageUrl: "url",
-        city: "BCN",
-        country: "España",
-      };
       const sagradaFamilia = new Monument(
         monumentData.name,
         monumentData.description,
@@ -44,27 +45,18 @@ describe("Given the  monumentsConroller addMonument method", () => {
         { city: monumentData.city, country: monumentData.country },
       );
 
-      const req: PartialRequestWithMonumentWithoutId = {
-        body: {
-          name: "Sagrada familia",
-          description: "templo sin acabar",
-          city: "BCN",
-          country: "España",
-          imageUrl: "url",
-        },
-      };
-
       const monumentsRepository: InMemoryMonumentsRepository = {
         monuments: [],
         getAll: jest.fn(),
         addMonument: jest.fn().mockReturnValue(sagradaFamilia),
+        deleteMonumentById: jest.fn(),
       };
       const monumentsController = new MonumentsController(monumentsRepository);
 
       await monumentsController.addMonument(
         req as RequestWithMonumentBodyWithoutId,
         res as Response,
-        next as NextFunction,
+        next,
       );
 
       expect(res.json).toHaveBeenCalledWith({
@@ -78,7 +70,7 @@ describe("Given the  monumentsConroller addMonument method", () => {
       await monumentsController.addMonument(
         req as RequestWithMonumentBodyWithoutId,
         res as Response,
-        next as NextFunction,
+        next,
       );
 
       expect(res.status).toHaveBeenCalledWith(expectedStatusCode);

@@ -33,11 +33,23 @@ class MonumentsController implements MonumentControllerStructure {
       );
 
       res.status(201).json({ createdMonument: newMonument });
-    } catch {
-      const error = new ServerError(
-        `Monument named ${name} already exists`,
-        409,
-      );
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  deleteMonument = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
+    const monumentId = req.params.id;
+    try {
+      const deletedMonument =
+        await this.monumentsRepository.deleteMonumentById(monumentId);
+
+      res.status(200).json({ deletedMonument });
+    } catch (error) {
       next(error);
     }
   };

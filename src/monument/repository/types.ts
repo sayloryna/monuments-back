@@ -9,5 +9,6 @@ interface MonumentsRepository {
     imageUrl: string,
     location: MonumentLocation,
   ): Promise<Monument>;
+  deleteMonumentById(monumentId: string): Promise<Monument>;
 }
 export default MonumentsRepository;
