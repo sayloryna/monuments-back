@@ -6,7 +6,7 @@ import type MonumentsRepository from "./types.js";
 class InMemoryMonumentsRepository implements MonumentsRepository {
   constructor(public monuments: Monuments) {}
 
-  getAll = async () => this.monuments;
+  getAll = async (): Promise<Monuments> => this.monuments;
 
   addMonument = async (
     name: string,
@@ -31,7 +31,7 @@ class InMemoryMonumentsRepository implements MonumentsRepository {
     return newMonument;
   };
 
-  deleteMonumentById = async (monumentId: string) => {
+  deleteMonumentById = async (monumentId: string): Promise<Monument> => {
     const monumentToDeleteIndex = this.monuments.findIndex(
       (monument) => monument.id === monumentId,
     );
