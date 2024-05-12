@@ -5,15 +5,15 @@ import { type Monuments } from "../../Monument/types";
 import InMemoryMonumentsRepository from "../InMemoryMonumentRepository";
 
 describe("Given the inMemoryMonumentRepository addMonument method", () => {
+  const sagradaFamilia: MonumentWithoutId = {
+    name: "Sagrada familia",
+    description: "templo sin acabar",
+    imageUrl: "url",
+    city: "BCN",
+    country: "España",
+  };
   describe("When it receives 'Sagrada Familia','templo sin acabar', 'url' 'BCN' y 'España' and there is NOT a monument Sagrada familia in the list", () => {
     test("Then it should return the 'sagrada familia' monument", async () => {
-      const monumentData: MonumentWithoutId = {
-        name: "Sagrada familia",
-        description: "templo sin acabar",
-        imageUrl: "url",
-        city: "BCN",
-        country: "España",
-      };
       const emptyMonumentsList: Monuments = [];
 
       const monumentRepository = new InMemoryMonumentsRepository(
@@ -21,31 +21,27 @@ describe("Given the inMemoryMonumentRepository addMonument method", () => {
       );
 
       const newMonument = await monumentRepository.addMonument(
-        monumentData.name,
-        monumentData.description,
-        monumentData.imageUrl,
-        { city: monumentData.city, country: monumentData.country },
+        sagradaFamilia.name,
+        sagradaFamilia.description,
+        sagradaFamilia.imageUrl,
+        { city: sagradaFamilia.city, country: sagradaFamilia.country },
       );
 
-      expect(newMonument).toMatchObject(expect.objectContaining(monumentData));
+      expect(newMonument).toMatchObject(
+        expect.objectContaining(sagradaFamilia),
+      );
     });
   });
 
   describe("When it receives 'Sagrada Familia','templo sin acabar', 'url' 'BCN' y 'España' and there IS a monument Sagrada familia in the list", () => {
     test("Then it should throw an error 'Monument named 'Sagrada Familia' already exists' and the statusCode 409", async () => {
-      const monumentData: MonumentWithoutId = {
-        name: "Sagrada familia",
-        description: "templo sin acabar",
-        imageUrl: "url",
-        city: "BCN",
-        country: "España",
-      };
-
       const monuments = [
-        new Monument("sagrada familia", "casi-templo", "url", {
-          city: "BCN",
-          country: "supain",
-        }),
+        new Monument(
+          sagradaFamilia.name,
+          sagradaFamilia.description,
+          sagradaFamilia.imageUrl,
+          { city: sagradaFamilia.city, country: sagradaFamilia.city },
+        ),
       ];
 
       const monumentRepository = new InMemoryMonumentsRepository(monuments);
@@ -56,10 +52,10 @@ describe("Given the inMemoryMonumentRepository addMonument method", () => {
 
       try {
         await monumentRepository.addMonument(
-          monumentData.name,
-          monumentData.description,
-          monumentData.imageUrl,
-          { city: monumentData.city, country: monumentData.country },
+          sagradaFamilia.name,
+          sagradaFamilia.description,
+          sagradaFamilia.imageUrl,
+          { city: sagradaFamilia.city, country: sagradaFamilia.country },
         );
       } catch (error) {
         expect(error).toEqual(expectedError);
