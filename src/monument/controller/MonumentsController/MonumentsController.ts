@@ -1,25 +1,25 @@
 import { type NextFunction, type Request, type Response } from "express";
-import type MonumentsControllerStructure from "./types.js";
+import type MonumentControllerStructure from "./types.js";
 import type MonumentsRepository from "../../repository/types.js";
 import {
   type RequestWithIdParameter,
   type RequestWithMonumentBodyWithoutId,
 } from "./types.js";
 
-class MonumentsController implements MonumentsControllerStructure {
+class MonumentsController implements MonumentControllerStructure {
   constructor(private readonly monumentsRepository: MonumentsRepository) {}
 
-  getMonuments = async (_req: Request, res: Response): Promise<void> => {
+  async getMonuments(_req: Request, res: Response): Promise<void> {
     res
       .status(200)
-      .json({ monuments: await this.monumentsRepository.getMonuments() });
-  };
+      .json({ monuments: await this.monumentsRepository.getAll() });
+  }
 
-  addMonument = async (
+  async addMonument(
     req: RequestWithMonumentBodyWithoutId,
     res: Response,
     next: NextFunction,
-  ): Promise<void> => {
+  ): Promise<void> {
     const { city, description, imageUrl, country, name } = req.body;
 
     try {
@@ -37,13 +37,13 @@ class MonumentsController implements MonumentsControllerStructure {
     } catch (error) {
       next(error);
     }
-  };
+  }
 
-  deleteMonument = async (
+  async deleteMonument(
     req: RequestWithIdParameter,
     res: Response,
     next: NextFunction,
-  ): Promise<void> => {
+  ): Promise<void> {
     const { id } = req.params;
 
     try {
@@ -54,7 +54,7 @@ class MonumentsController implements MonumentsControllerStructure {
     } catch (error) {
       next(error);
     }
-  };
+  }
 }
 
 export default MonumentsController;

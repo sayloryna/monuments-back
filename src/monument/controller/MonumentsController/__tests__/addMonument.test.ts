@@ -11,7 +11,7 @@ import {
 import { monumentsController } from "../..";
 import ServerError from "../../../../server/middlewares/errors/ServerError/ServerError";
 
-describe("Given the  monumentsConroller addMonument method", () => {
+describe("Given the  monumentsController addMonument method", () => {
   const res: ResponseWithStatusAndJson = {
     status: jest.fn().mockReturnThis(),
     json: jest.fn(),
@@ -50,7 +50,7 @@ describe("Given the  monumentsConroller addMonument method", () => {
     test("Then it should call the response method with  the 'Sagrada familia' monument", async () => {
       const monumentsRepository: InMemoryMonumentsRepository = {
         monuments: [],
-        getMonuments: jest.fn(),
+        getAll: jest.fn(),
         addMonument: jest.fn().mockReturnValue(sagradaFamilia),
         deleteMonumentById: jest.fn(),
       };

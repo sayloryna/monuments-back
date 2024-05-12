@@ -6,14 +6,16 @@ import type MonumentsRepository from "./types.js";
 class InMemoryMonumentsRepository implements MonumentsRepository {
   constructor(public monuments: Monuments) {}
 
-  getMonuments = async (): Promise<Monuments> => this.monuments;
+  async getAll(): Promise<Monuments> {
+    return this.monuments;
+  }
 
-  addMonument = async (
+  async addMonument(
     name: string,
     description: string,
     imageUrl: string,
     { country, city }: MonumentLocation,
-  ): Promise<Monument> => {
+  ): Promise<Monument> {
     const newMonument = new Monument(name, description, imageUrl, {
       country,
       city,
@@ -29,9 +31,9 @@ class InMemoryMonumentsRepository implements MonumentsRepository {
     this.monuments.push(newMonument);
 
     return newMonument;
-  };
+  }
 
-  deleteMonumentById = async (monumentId: string): Promise<Monument> => {
+  async deleteMonumentById(monumentId: string): Promise<Monument> {
     const monumentToDeleteIndex = this.monuments.findIndex(
       (monument) => monument.id === monumentId,
     );
@@ -43,7 +45,7 @@ class InMemoryMonumentsRepository implements MonumentsRepository {
     const [deletedMonument] = this.monuments.splice(monumentToDeleteIndex, 1);
 
     return deletedMonument;
-  };
+  }
 }
 
 export default InMemoryMonumentsRepository;

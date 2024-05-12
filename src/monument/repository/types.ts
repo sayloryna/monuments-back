@@ -2,7 +2,7 @@ import type Monument from "../Monument/Monument.js";
 import { type MonumentLocation, type Monuments } from "../Monument/types";
 
 interface MonumentsRepository {
-  getMonuments(): Promise<Monuments>;
+  getAll(): Promise<Monuments>;
   addMonument(
     name: string,
     description: string,
