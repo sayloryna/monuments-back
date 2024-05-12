@@ -8,18 +8,17 @@ import {
 
 class MonumentsController implements MonumentControllerStructure {
   constructor(private readonly monumentsRepository: MonumentsRepository) {}
-
-  async getMonuments(_req: Request, res: Response): Promise<void> {
+  getMonuments = async (_req: Request, res: Response): Promise<void> => {
     res
       .status(200)
       .json({ monuments: await this.monumentsRepository.getAll() });
-  }
+  };
 
-  async addMonument(
+  addMonument = async (
     req: RequestWithMonumentBodyWithoutId,
     res: Response,
     next: NextFunction,
-  ): Promise<void> {
+  ): Promise<void> => {
     const { city, description, imageUrl, country, name } = req.body;
 
     try {
@@ -37,13 +36,13 @@ class MonumentsController implements MonumentControllerStructure {
     } catch (error) {
       next(error);
     }
-  }
+  };
 
-  async deleteMonument(
+  deleteMonument = async (
     req: RequestWithIdParameter,
     res: Response,
     next: NextFunction,
-  ): Promise<void> {
+  ): Promise<void> => {
     const { id } = req.params;
 
     try {
@@ -54,7 +53,7 @@ class MonumentsController implements MonumentControllerStructure {
     } catch (error) {
       next(error);
     }
-  }
+  };
 }
 
 export default MonumentsController;
