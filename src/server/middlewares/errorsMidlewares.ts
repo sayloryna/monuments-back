@@ -17,7 +17,7 @@ export const generalError = (
   _req: Request,
   res: Response,
   _next: NextFunction,
-) => {
+): void => {
   const statusCode = error.statusCode ?? 500;
 
   console.log(chalk.red(`${error.message}`));

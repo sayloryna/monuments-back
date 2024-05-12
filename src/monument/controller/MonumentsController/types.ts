@@ -21,4 +21,6 @@ export type PartialRequestWithMonumentWithoutId = Partial<
   >
 >;
 
+export type RequestWithIdParameter = Request<{ id: string }>;
+
 export default MonumentControllerStructure;

@@ -4,7 +4,7 @@ import InMemoryMonumentsRepository from "../InMemoryMonumentRepository";
 
 describe("Given the InMemoryMonumentRepository deleteMonumentById method", () => {
   describe("When it receives the Id:'miau1234' ans its monument list contains a monuemnt with id: 'miau1234'", () => {
-    test("Then it should remove the monument with Id: 'miau1234' from its monuments list  and return the monument", async () => {
+    test("Then it should return the monument", async () => {
       const monuments: Monuments = [
         {
           name: "Parthenon",

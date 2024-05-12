@@ -4,13 +4,14 @@ import InMemoryMonumentsRepository from "../../../repository/InMemoryMonumentRep
 import { type Monuments } from "../../../Monument/types";
 import type Monument from "../../../Monument/Monument";
 import ServerError from "../../../../server/middlewares/errors/ServerError/ServerError";
+import { type RequestWithIdParameter } from "../types";
 
 describe("Given the MonumentsController deleteMonument method", () => {
   const res: Pick<Response, "status" | "json"> = {
     status: jest.fn().mockReturnThis(),
     json: jest.fn(),
   };
-  const req: Partial<Request> = { params: { id: "1234Miau" } };
+  const req: Partial<RequestWithIdParameter> = { params: { id: "1234Miau" } };
   const next = jest.fn();
 
   beforeEach(() => {
@@ -43,7 +44,7 @@ describe("Given the MonumentsController deleteMonument method", () => {
       const monumentsController = new MonumentsController(monumentRepository);
 
       await monumentsController.deleteMonument(
-        req as Request,
+        req as RequestWithIdParameter,
         res as Response,
         next as NextFunction,
       );
@@ -74,7 +75,7 @@ describe("Given the MonumentsController deleteMonument method", () => {
       const monumentsController = new MonumentsController(monumentRepository);
 
       await monumentsController.deleteMonument(
-        req as Request,
+        req as RequestWithIdParameter,
         res as Response,
         next,
       );
@@ -122,7 +123,7 @@ describe("Given the MonumentsController deleteMonument method", () => {
       );
 
       await monumentsController.deleteMonument(
-        req as Request,
+        req as RequestWithIdParameter,
         res as Response,
         next as NextFunction,
       );

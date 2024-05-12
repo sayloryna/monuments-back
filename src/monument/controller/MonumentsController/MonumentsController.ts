@@ -1,7 +1,10 @@
 import { type NextFunction, type Request, type Response } from "express";
 import type MonumentControllerStructure from "./types.js";
 import type MonumentsRepository from "../../repository/types.js";
-import { type RequestWithMonumentBodyWithoutId } from "./types.js";
+import {
+  type RequestWithIdParameter,
+  type RequestWithMonumentBodyWithoutId,
+} from "./types.js";
 
 class MonumentsController implements MonumentControllerStructure {
   constructor(private readonly monumentsRepository: MonumentsRepository) {}
@@ -37,14 +40,15 @@ class MonumentsController implements MonumentControllerStructure {
   };
 
   deleteMonument = async (
-    req: Request,
+    req: RequestWithIdParameter,
     res: Response,
     next: NextFunction,
   ): Promise<void> => {
-    const monumentId = req.params.id;
+    const { id } = req.params;
+
     try {
       const deletedMonument =
-        await this.monumentsRepository.deleteMonumentById(monumentId);
+        await this.monumentsRepository.deleteMonumentById(id);
 
       res.status(200).json({ deletedMonument });
     } catch (error) {
