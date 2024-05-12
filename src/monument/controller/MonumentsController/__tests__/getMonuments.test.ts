@@ -3,6 +3,7 @@ import { type Monuments } from "../../../Monument/types";
 import Monument from "../../../Monument/Monument";
 import InMemoryMonumentsRepository from "../../../repository/InMemoryMonumentRepository";
 import MonumentsController from "../MonumentsController";
+import { type ResponseWithStatusAndJson } from "../types";
 
 describe("Given the MonumentsController getMonument method", () => {
   describe("When it receives a response", () => {
@@ -26,7 +27,7 @@ describe("Given the MonumentsController getMonument method", () => {
       const monumentsController = new MonumentsController(monumentsRepository);
 
       const req = {};
-      const res: Pick<Response, "status" | "json"> = {
+      const res: ResponseWithStatusAndJson = {
         status: jest.fn().mockReturnThis(),
         json: jest.fn(),
       };
