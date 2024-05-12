@@ -4,52 +4,49 @@ import InMemoryMonumentsRepository from "../InMemoryMonumentRepository";
 
 describe("Given the InMemoryMonumentRepository deleteMonumentById method", () => {
   describe("When it receives the Id:'miau1234' ans its monument list contains a monuemnt with id: 'miau1234'", () => {
+    const monument1 = {
+      name: "Parthenon",
+      description: "templo",
+      imageUrl: "url",
+      city: "Athenas",
+      country: "grecia",
+      id: "atheneaNike",
+    };
+    const monumentWithMatchingId = {
+      name: "Miautenon",
+      description: "Cat Templo",
+      imageUrl: "url",
+      city: "Miathenas",
+      country: "greciau",
+      id: "miau1234",
+    };
+    const monumentId = "miau1234";
+
+    let monuments: Monuments = [];
+
+    beforeEach(() => {
+      monuments = [monument1, monumentWithMatchingId];
+    });
+
     test("Then it should return the monument", async () => {
-      const monuments: Monuments = [
-        {
-          name: "Parthenon",
-          description: "templo",
-          imageUrl: "url",
-          city: "Athenas",
-          country: "grecia",
-          id: "atheneaNike",
-        },
-        {
-          name: "Miautenon",
-          description: "Cat Templo",
-          imageUrl: "url",
-          city: "Miathenas",
-          country: "greciau",
-          id: "miau1234",
-        },
-      ];
-      const expectedMonuemnts: Monuments = [
-        {
-          name: "Parthenon",
-          description: "templo",
-          imageUrl: "url",
-          city: "Athenas",
-          country: "grecia",
-          id: "atheneaNike",
-        },
-      ];
-
-      const expectedMonument = {
-        name: "Miautenon",
-        description: "Cat Templo",
-        imageUrl: "url",
-        city: "Miathenas",
-        country: "greciau",
-        id: "miau1234",
-      };
-
       const memoryRepository = new InMemoryMonumentsRepository(monuments);
 
       const deletedMonument =
-        await memoryRepository.deleteMonumentById("miau1234");
+        await memoryRepository.deleteMonumentById(monumentId);
 
-      expect(memoryRepository.monuments).toStrictEqual(expectedMonuemnts);
-      expect(deletedMonument).toEqual(expectedMonument);
+      expect(deletedMonument).toEqual(monumentWithMatchingId);
+    });
+
+    test("Thenit should delete the monument taht matches that id from the monuments list", async () => {
+      const memoryRepository = new InMemoryMonumentsRepository(monuments);
+
+      const expectedMonumentsAfterDelete: Monuments = [monument1];
+
+      await memoryRepository.deleteMonumentById(monumentId);
+
+      expect(memoryRepository.monuments).toStrictEqual(
+        expectedMonumentsAfterDelete,
+      );
     });
   });
 
