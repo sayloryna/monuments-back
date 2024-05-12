@@ -12,17 +12,21 @@ import { monumentsController } from "../..";
 import ServerError from "../../../../server/middlewares/errors/ServerError/ServerError";
 
 describe("Given the  monumentsController addMonument method", () => {
+  const sagrdafamiliaData: MonumentWithoutId = {
+    name: "Sagrada Familia",
+    description: "templo sin acabar",
+    imageUrl: "url",
+    city: "BCN",
+    country: "España",
+  };
+
   const res: ResponseWithStatusAndJson = {
     status: jest.fn().mockReturnThis(),
     json: jest.fn(),
   };
   const req: PartialRequestWithMonumentWithoutId = {
     body: {
-      name: "Sagrada familia",
-      description: "templo sin acabar",
-      city: "BCN",
-      country: "España",
-      imageUrl: "url",
+      ...sagrdafamiliaData,
     },
   };
   const next = jest.fn();
@@ -31,19 +35,11 @@ describe("Given the  monumentsController addMonument method", () => {
     jest.clearAllMocks();
   });
 
-  const monumentData: MonumentWithoutId = {
-    name: "Sagrada Familia",
-    description: "templo sin acabar",
-    imageUrl: "url",
-    city: "BCN",
-    country: "España",
-  };
-
   const sagradaFamilia = new Monument(
-    monumentData.name,
-    monumentData.description,
-    monumentData.imageUrl,
-    { city: monumentData.city, country: monumentData.country },
+    sagrdafamiliaData.name,
+    sagrdafamiliaData.description,
+    sagrdafamiliaData.imageUrl,
+    { city: sagrdafamiliaData.city, country: sagrdafamiliaData.country },
   );
 
   describe("When it receives a request with 'Sagrada Familia','templo sin acabar', 'url' 'BCN' y 'España'", () => {
@@ -82,13 +78,16 @@ describe("Given the  monumentsController addMonument method", () => {
 
   describe("When it receives a request with 'Templo Miau','templo de gattos', 'url' 'Aviles' y 'España' and there's a Templo miau in the list", () => {
     test("Then it should call the next function with the error'Monument named 'Templo Miau' already exists' with the statusCode 409 ", async () => {
+      const newMonumentData = {
+        name: "Templo Miau",
+        description: "templo de gatos",
+        city: "BCN",
+        country: "España",
+        imageUrl: "url",
+      };
       const req: PartialRequestWithMonumentWithoutId = {
         body: {
-          name: "Templo Miau",
-          description: "templo de gatos",
-          city: "BCN",
-          country: "España",
-          imageUrl: "url",
+          ...newMonumentData,
         },
       };
       const monuments = [
