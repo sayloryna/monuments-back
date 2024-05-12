@@ -4,10 +4,13 @@ import InMemoryMonumentsRepository from "../../../repository/InMemoryMonumentRep
 import { type Monuments } from "../../../Monument/types";
 import type Monument from "../../../Monument/Monument";
 import ServerError from "../../../../server/middlewares/errors/ServerError/ServerError";
-import { type RequestWithIdParameter } from "../types";
+import {
+  type ResponseWithStatusAndJson,
+  type RequestWithIdParameter,
+} from "../types";
 
 describe("Given the MonumentsController deleteMonument method", () => {
-  const res: Pick<Response, "status" | "json"> = {
+  const res: ResponseWithStatusAndJson = {
     status: jest.fn().mockReturnThis(),
     json: jest.fn(),
   };

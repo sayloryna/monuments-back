@@ -3,15 +3,16 @@ import Monument from "../../../Monument/Monument";
 import MonumentsController from "../MonumentsController";
 import InMemoryMonumentsRepository from "../../../repository/InMemoryMonumentRepository";
 import {
+  type ResponseWithStatusAndJson,
   type PartialRequestWithMonumentWithoutId,
   type RequestWithMonumentBodyWithoutId,
+  type MonumentWithoutId,
 } from "../types";
 import { monumentsController } from "../..";
 import ServerError from "../../../../server/middlewares/errors/ServerError/ServerError";
-import monuments from "../../../data";
 
 describe("Given the  monumentsConroller addMonument method", () => {
-  const res: Pick<Response, "status" | "json"> = {
+  const res: ResponseWithStatusAndJson = {
     status: jest.fn().mockReturnThis(),
     json: jest.fn(),
   };
@@ -30,7 +31,7 @@ describe("Given the  monumentsConroller addMonument method", () => {
     jest.clearAllMocks();
   });
 
-  const monumentData: Omit<Monument, "id"> = {
+  const monumentData: MonumentWithoutId = {
     name: "Sagrada Familia",
     description: "templo sin acabar",
     imageUrl: "url",

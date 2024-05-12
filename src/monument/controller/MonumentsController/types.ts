@@ -21,6 +21,10 @@ export type PartialRequestWithMonumentWithoutId = Partial<
   >
 >;
 
+export type MonumentWithoutId = Omit<Monument, "id">;
+
+export type ResponseWithStatusAndJson = Pick<Response, "status" | "json">;
+
 export type RequestWithIdParameter = Request<{ id: string }>;
 
 export default MonumentControllerStructure;
