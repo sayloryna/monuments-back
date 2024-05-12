@@ -50,7 +50,7 @@ describe("Given the  monumentsConroller addMonument method", () => {
     test("Then it should call the response method with  the 'Sagrada familia' monument", async () => {
       const monumentsRepository: InMemoryMonumentsRepository = {
         monuments: [],
-        getAll: jest.fn(),
+        getMonuments: jest.fn(),
         addMonument: jest.fn().mockReturnValue(sagradaFamilia),
         deleteMonumentById: jest.fn(),
       };

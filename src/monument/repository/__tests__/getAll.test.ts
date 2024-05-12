@@ -18,7 +18,7 @@ describe("Given the inMemoryMonumentsRepository  getAll method", () => {
         repositoryMonuments,
       );
 
-      const monuments = await inMemoryMonumentsRepository.getAll();
+      const monuments = await inMemoryMonumentsRepository.getMonuments();
 
       expect(monuments).toBe(repositoryMonuments);
     });

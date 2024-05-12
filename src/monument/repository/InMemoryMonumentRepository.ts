@@ -6,7 +6,7 @@ import type MonumentsRepository from "./types.js";
 class InMemoryMonumentsRepository implements MonumentsRepository {
   constructor(public monuments: Monuments) {}
 
-  getAll = async (): Promise<Monuments> => this.monuments;
+  getMonuments = async (): Promise<Monuments> => this.monuments;
 
   addMonument = async (
     name: string,
